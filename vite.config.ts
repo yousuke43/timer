@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
+  base: '/timer/',
   resolve: {
     alias: {
       '@': '/src',
@@ -19,8 +20,8 @@ export default defineConfig({
         background_color: '#ffffff',
         display: 'standalone',
         orientation: 'portrait',
-        scope: '/',
-        start_url: '/',
+        scope: '/timer/',
+        start_url: '/timer/',
         icons: [
           {
             src: '/icons/icon-192.svg',
