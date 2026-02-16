@@ -1,17 +1,15 @@
 // ============================================================
 // HomePage: ホーム画面（行動ボタン + 24h円グラフ + 行動中画面）
 // ============================================================
-import type { Activity, OngoingActivity, AggregatedData, TimeBlock } from '../models';
+import type { Activity, OngoingActivity, TimeBlock } from '../models';
 import { database, recordService, statsService } from '../services';
 import { todayString, formatTime } from '../services/utils';
 import { render24HourChart } from '../components/chartRenderer';
-import { renderLegend } from '../components/legend';
 
 export class HomePage {
   private container: HTMLElement;
   private ongoing: OngoingActivity | null = null;
   private activities: Activity[] = [];
-  private todayData: AggregatedData[] = [];
   private timeBlocks: TimeBlock[] = [];
 
   constructor(container: HTMLElement) {
@@ -20,16 +18,14 @@ export class HomePage {
 
   async render(): Promise<void> {
     // データ取得
-    const [activities, ongoing, todayData, timeBlocks] = await Promise.all([
+    const [activities, ongoing, timeBlocks] = await Promise.all([
       database.getAllActivities(),
       recordService.getOngoing(),
-      statsService.getTodayStats(todayString()),
       statsService.getTodayTimeBlocks(todayString()),
     ]);
 
     this.activities = activities;
     this.ongoing = ongoing;
-    this.todayData = todayData;
     this.timeBlocks = timeBlocks;
 
     if (this.ongoing) {
@@ -47,7 +43,6 @@ export class HomePage {
         <div class="chart-container">
           <canvas id="home-chart" width="260" height="260"></canvas>
         </div>
-        <div id="home-legend" class="legend-container"></div>
         <div class="activity-buttons" id="activity-buttons"></div>
       </div>
     `;
@@ -56,12 +51,6 @@ export class HomePage {
     const canvas = document.getElementById('home-chart') as HTMLCanvasElement;
     if (canvas) {
       render24HourChart(canvas, this.timeBlocks);
-    }
-
-    // 凡例（集計データ）
-    const legendEl = document.getElementById('home-legend');
-    if (legendEl) {
-      renderLegend(legendEl, this.todayData);
     }
 
     // 行動ボタン
@@ -89,7 +78,6 @@ export class HomePage {
         <div class="chart-container" style="margin-top:24px;">
           <canvas id="home-chart" width="260" height="260"></canvas>
         </div>
-        <div id="home-legend" class="legend-container"></div>
       </div>
     `;
 
@@ -100,10 +88,6 @@ export class HomePage {
     const canvas = document.getElementById('home-chart') as HTMLCanvasElement;
     if (canvas) {
       render24HourChart(canvas, this.timeBlocks);
-    }
-    const legendEl = document.getElementById('home-legend');
-    if (legendEl) {
-      renderLegend(legendEl, this.todayData);
     }
   }
 
