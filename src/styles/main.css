@@ -147,9 +147,8 @@ button {
   /* safe-area 分を高さに加算（ノッチ端末のホームバー対策） */
   min-height: calc(var(--tab-height) + var(--safe-bottom));
   padding-bottom: var(--safe-bottom);
-  background: var(--bg-card);
-  border-top: 1px solid var(--border);
-  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
+  background: var(--primary);
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.12);
 }
 
 .tab-item {
@@ -158,13 +157,13 @@ button {
   align-items: center;
   gap: 2px;
   padding: 8px 16px;
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.6);
   transition: color 0.2s;
   border-radius: var(--radius-sm);
 }
 
 .tab-item.active {
-  color: var(--primary);
+  color: #ffffff;
 }
 
 .tab-label {
