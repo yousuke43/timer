@@ -373,6 +373,19 @@ button {
   background: #dc2626;
 }
 
+.btn-danger {
+  background: #ef4444;
+  color: white;
+  width: 100%;
+  padding: 14px;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+}
+
+.btn-danger:active {
+  background: #dc2626;
+}
+
 .btn-add {
   background: var(--primary);
   color: white;

@@ -76,6 +76,11 @@ export class SettingsPage {
             </label>
           </div>
         </section>
+
+        <section class="settings-section">
+          <h3 class="section-title">データ管理</h3>
+          <button class="btn btn-danger" id="btn-reset-records">記録をすべてリセット</button>
+        </section>
       </div>
     `;
 
@@ -118,6 +123,15 @@ export class SettingsPage {
       this.settings.theme.darkMode = (e.target as HTMLInputElement).checked;
       await database.saveSettings(this.settings);
       applyTheme(this.settings.theme);
+    });
+
+    // 記録リセット
+    document.getElementById('btn-reset-records')?.addEventListener('click', async () => {
+      if (confirm('すべての記録データを削除しますか？\nこの操作は取り消せません。')) {
+        await database.clearAllRecords();
+        alert('記録をリセットしました');
+        await this.render();
+      }
     });
   }
 

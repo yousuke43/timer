@@ -109,6 +109,15 @@ export async function deleteRecord(id: string): Promise<void> {
   await db.delete('records', id);
 }
 
+// ---- Reset ----
+
+export async function clearAllRecords(): Promise<void> {
+  const db = await getDB();
+  await db.clear('records');
+  // 進行中の行動もクリア
+  await setOngoingActivity(null);
+}
+
 // ---- Ongoing Activity ----
 
 export async function getOngoingActivity(): Promise<OngoingActivity | null> {
