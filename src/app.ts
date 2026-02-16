@@ -22,7 +22,7 @@ export class App {
     appEl.innerHTML = `
       <div class="app-shell">
         <header class="app-header">
-          <span class="app-header-title">Activity Tracker</span>
+          <span class="app-header-title">怠惰（たいだ）の記録</span>
         </header>
         <main class="app-content" id="app-content"></main>
         <footer class="app-footer" id="app-footer"></footer>

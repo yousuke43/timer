@@ -39,7 +39,7 @@ export class HomePage {
   private renderIdleView(): void {
     this.container.innerHTML = `
       <div class="page home-page">
-        <h2 class="page-title">今日の行動</h2>
+        <h2 class="page-title">${todayString()}</h2>
         <div class="chart-container">
           <canvas id="home-chart" width="260" height="260"></canvas>
         </div>
