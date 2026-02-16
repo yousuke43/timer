@@ -50,6 +50,7 @@
 
 html {
   font-size: 16px;
+  height: 100%;
   -webkit-text-size-adjust: 100%;
 }
 
@@ -59,13 +60,17 @@ body {
   background: var(--bg);
   color: var(--text);
   line-height: 1.6;
-  overflow-x: hidden;
+  height: 100%;
+  overflow: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /* PWA: 長押しメニューを抑制 */
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   user-select: none;
+  /* PWA: バウンス/pull-to-refresh を防止 */
+  overscroll-behavior: none;
+  -webkit-overflow-scrolling: touch;
 }
 
 input, button, textarea {
@@ -84,14 +89,21 @@ button {
 .app-shell {
   display: flex;
   flex-direction: column;
-  min-height: 100dvh;
+  height: 100dvh;
+  height: 100vh; /* fallback */
+  height: 100dvh;
   max-width: 480px;
   margin: 0 auto;
+  position: relative;
+  overflow: hidden;
 }
 
 .app-content {
   flex: 1;
   overflow-y: auto;
+  overscroll-behavior-y: contain;
+  -webkit-overflow-scrolling: touch;
+  /* 下のタブバーに被らないよう余白 */
   padding-bottom: calc(var(--tab-height) + var(--safe-bottom) + 16px);
 }
 
@@ -107,14 +119,15 @@ button {
 
 /* ---- App Header ---- */
 .app-header {
-  position: sticky;
-  top: 0;
+  flex-shrink: 0;
   z-index: 100;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
-  height: var(--header-height);
+  /* safe-area 分を高さに加算して潰れを防止 */
+  min-height: calc(var(--header-height) + var(--safe-top));
   padding-top: var(--safe-top);
+  padding-bottom: 10px;
   background: var(--primary);
   color: #ffffff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
@@ -131,7 +144,8 @@ button {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  height: var(--tab-height);
+  /* safe-area 分を高さに加算（ノッチ端末のホームバー対策） */
+  min-height: calc(var(--tab-height) + var(--safe-bottom));
   padding-bottom: var(--safe-bottom);
   background: var(--bg-card);
   border-top: 1px solid var(--border);
