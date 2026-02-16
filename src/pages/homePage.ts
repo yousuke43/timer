@@ -79,12 +79,11 @@ export class HomePage {
     this.container.innerHTML = `
       <div class="page ongoing-page">
         <div class="ongoing-card">
-          <div class="ongoing-icon">${activity?.icon ?? '⏱'}</div>
           <h2 class="ongoing-title">${activity?.name ?? '不明'}</h2>
           <p class="ongoing-status">行動中</p>
           <p class="ongoing-start">開始: ${startTimeStr}</p>
           <button class="btn btn-stop" id="btn-stop">
-            ⏹ ストップ
+            ストップ
           </button>
         </div>
         <div class="chart-container" style="margin-top:24px;">
@@ -118,7 +117,6 @@ export class HomePage {
       btn.className = 'btn btn-activity';
       btn.style.setProperty('--activity-color', activity.color);
       btn.innerHTML = `
-        <span class="btn-activity-icon">${activity.icon}</span>
         <span class="btn-activity-name">${activity.name}</span>
       `;
       btn.addEventListener('click', () => this.handleStart(activity));

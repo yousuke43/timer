@@ -10,10 +10,10 @@ export function renderTabBar(
 ): void {
   container.innerHTML = '';
 
-  const tabs: { id: TabType; label: string; icon: string }[] = [
-    { id: 'home', label: 'ホーム', icon: '🏠' },
-    { id: 'records', label: '記録', icon: '📊' },
-    { id: 'settings', label: '設定', icon: '⚙️' },
+  const tabs: { id: TabType; label: string }[] = [
+    { id: 'home', label: 'ホーム' },
+    { id: 'records', label: '記録' },
+    { id: 'settings', label: '設定' },
   ];
 
   const nav = document.createElement('nav');
@@ -23,7 +23,6 @@ export function renderTabBar(
     const btn = document.createElement('button');
     btn.className = `tab-item ${activeTab === tab.id ? 'active' : ''}`;
     btn.innerHTML = `
-      <span class="tab-icon">${tab.icon}</span>
       <span class="tab-label">${tab.label}</span>
     `;
     btn.addEventListener('click', () => onTabChange(tab.id));

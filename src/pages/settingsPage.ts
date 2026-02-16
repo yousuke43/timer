@@ -44,10 +44,9 @@ export class SettingsPage {
                 (a) => `
               <div class="activity-row" data-id="${a.id}">
                 <span class="activity-color-dot" style="background:${a.color}"></span>
-                <span class="activity-icon-display">${a.icon}</span>
                 <span class="activity-name-display">${a.name}</span>
-                <button class="btn-icon btn-edit" data-id="${a.id}" title="編集">✏️</button>
-                <button class="btn-icon btn-delete" data-id="${a.id}" title="削除">🗑️</button>
+                <button class="btn-icon btn-edit" data-id="${a.id}" title="編集">編集</button>
+                <button class="btn-icon btn-delete" data-id="${a.id}" title="削除">削除</button>
               </div>
             `
               )
@@ -149,10 +148,6 @@ export class SettingsPage {
             <input type="text" id="dlg-name" value="${existing?.name ?? ''}" maxlength="20" placeholder="例: 勉強" />
           </div>
           <div class="form-group">
-            <label>アイコン（絵文字）</label>
-            <input type="text" id="dlg-icon" value="${existing?.icon ?? '📌'}" maxlength="4" />
-          </div>
-          <div class="form-group">
             <label>カラー</label>
             <input type="color" id="dlg-color" value="${existing?.color ?? '#6366f1'}" />
           </div>
@@ -177,7 +172,7 @@ export class SettingsPage {
 
     document.getElementById('dlg-confirm')?.addEventListener('click', async () => {
       const name = (document.getElementById('dlg-name') as HTMLInputElement).value.trim();
-      const icon = (document.getElementById('dlg-icon') as HTMLInputElement).value.trim() || '📌';
+      const icon = '●';
       const color = (document.getElementById('dlg-color') as HTMLInputElement).value;
 
       if (!name) {

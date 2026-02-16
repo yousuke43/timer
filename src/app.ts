@@ -21,6 +21,9 @@ export class App {
     // アプリ構造を構築
     appEl.innerHTML = `
       <div class="app-shell">
+        <header class="app-header">
+          <span class="app-header-title">Activity Tracker</span>
+        </header>
         <main class="app-content" id="app-content"></main>
         <footer class="app-footer" id="app-footer"></footer>
       </div>
